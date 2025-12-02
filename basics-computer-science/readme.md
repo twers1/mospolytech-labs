@@ -19,6 +19,14 @@
 - `Lab1.pdf` — условие лабораторной работы
 
 
+## Лабораторная работа №10
+
+- `Main.java` — классы
+
+**Ссылка на код:**
+
+*https://github.com/twers1/mospolytech-labs/tree/main/basics-computer-science/laba10*
+
 
 ## Лабораторная работа №11
 
