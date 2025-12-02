@@ -19,6 +19,15 @@
 - `Lab1.pdf` — условие лабораторной работы
 
 
+## Лабораторная работа №9
+
+- `Main.java` — матрицы
+
+**Ссылка на код:**
+
+*https://github.com/twers1/mospolytech-labs/tree/main/basics-computer-science/laba9*
+
+
 ## Лабораторная работа №10
 
 - `Main.java` — классы
