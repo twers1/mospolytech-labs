@@ -1,2 +1,1 @@
-# mospolytech-labs
-Labs mospolytech
+# Лабораторные работы. Московский политех
