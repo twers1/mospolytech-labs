@@ -12,7 +12,7 @@
 
 **Ссылка на код:**
 
-*(при необходимости вставь сюда ссылку на репозиторий или директорию)*
+*https://github.com/twers1/mospolytech-labs/tree/main/basics-computer-science/laba1*
 
 **Материалы:**
 
