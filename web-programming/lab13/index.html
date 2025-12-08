@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Лаба 13 — Пазлы</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="card">
+			<h1>Лабораторная работа №13 — Пазлы</h1>
+
+			<p>
+				Собери картинку из 6 частей. Нажми на кусок — он приклеится к мыши,
+				нажми снова — отпустится.
+			</p>
+
+			<div id="puzzle-area"></div>
+
+			<button class="btn-check" onclick="checkPuzzle()">
+				Проверить сборку
+			</button>
+		</div>
+
+		<script>
+			const area = document.getElementById('puzzle-area')
+
+			let pieces = []
+			let grabbed = null
+
+
+			function createPieces() {
+				let index = 0
+				const img = 'puzzle.jpg'
+
+				for (let row = 0; row < 2; row++) {
+					for (let col = 0; col < 3; col++) {
+						let piece = document.createElement('div')
+						piece.className = 'piece'
+
+						piece.dataset.correctX = col * 200
+						piece.dataset.correctY = row * 150
+
+						piece.style.backgroundImage = `url(${img})`
+						piece.style.backgroundPosition = `-${col * 200}px -${row * 150}px`
+
+						piece.style.left = Math.random() * 400 + 'px'
+						piece.style.top = Math.random() * 250 + 'px'
+
+						piece.addEventListener('click', () => toggleGrab(piece))
+
+						area.appendChild(piece)
+						pieces.push(piece)
+
+						index++
+					}
+				}
+			}
+
+			document.addEventListener('mousemove', e => {
+				if (!grabbed) return
+
+				const rect = area.getBoundingClientRect()
+				grabbed.style.left = e.clientX - rect.left - 100 + 'px'
+				grabbed.style.top = e.clientY - rect.top - 75 + 'px'
+			})
+
+			function toggleGrab(piece) {
+				if (grabbed === piece) {
+					grabbed = null
+					piece.style.boxShadow = ''
+				} else {
+					grabbed = piece
+					piece.style.boxShadow = '0 0 15px #ffcf5c'
+				}
+			}
+
+
+			function checkPuzzle() {
+				let correct = true
+
+				pieces.forEach(p => {
+					let x = parseInt(p.style.left)
+					let y = parseInt(p.style.top)
+
+					let cx = parseInt(p.dataset.correctX)
+					let cy = parseInt(p.dataset.correctY)
+
+					if (Math.abs(x - cx) > 20 || Math.abs(y - cy) > 20) {
+						correct = false
+					}
+				})
+
+				if (correct) alert('Отлично! Пазл собран правильно 🎉')
+				else alert('Пока неправильно. Попробуй ещё 😊')
+			}
+
+			createPieces()
+		</script>
+	</body>
+</html>

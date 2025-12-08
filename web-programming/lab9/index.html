@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Лаба 9 — Дата и время</title>
+		<link rel="stylesheet" href="style.css" />
+
+		<script>
+			let enterTime
+			function startTimer() {
+				enterTime = new Date()
+			}
+
+			function showTimeOnPage() {
+				if (!enterTime) return
+				let leaveTime = new Date()
+				let diffSec = Math.round((leaveTime - enterTime) / 1000)
+				alert('Вы были на странице: ' + diffSec + ' секунд')
+			}
+
+			function endTimer() {
+				showTimeOnPage()
+			}
+
+			function setBackground() {
+				let sec = new Date().getSeconds()
+				let colorIndex = sec % 6
+
+				let colors = [
+					'#ffcf5c',
+					'#ff9b5c',
+					'#ff5c7a',
+					'#5c96ff',
+					'#5cff99',
+					'#e05cff',
+				]
+
+				document.body.style.background = colors[colorIndex]
+			}
+
+			function countdown() {
+				let input = document.getElementById('eventDate').value
+				let resultField = document.getElementById('timeLeft')
+
+				if (!input) {
+					resultField.value = 'Введите дату!'
+					return
+				}
+
+				let now = new Date()
+				let event = new Date(input)
+
+				let diff = event - now
+
+				if (diff <= 0) {
+					resultField.value = 'Событие уже наступило!'
+					return
+				}
+
+				let sec = Math.floor(diff / 1000)
+				let min = Math.floor(sec / 60)
+				let hours = Math.floor(min / 60)
+				let days = Math.floor(hours / 24)
+
+				sec %= 60
+				min %= 60
+				hours %= 24
+
+				resultField.value =
+					days + ' дн.  ' + hours + ' ч.  ' + min + ' мин.  ' + sec + ' сек.'
+			}
+
+			window.addEventListener('load', () => {
+				startTimer()
+				setInterval(countdown, 1000)
+				setInterval(setBackground, 1000)
+			})
+
+			window.addEventListener('beforeunload', endTimer)
+		</script>
+	</head>
+
+	<body onload="startTimer()" onunload="endTimer()">
+		<div class="card">
+			<h1>Лабораторная работа №9</h1>
+
+			<h3>9.1 Время, проведённое на странице</h3>
+			<p>
+				При закрытии вкладки <b>теоретически</b> появится сообщение, сколько
+				секунд вы были на странице.<br />
+				Но современные браузеры могут блокировать <code>alert</code> при
+				закрытии, поэтому ниже есть кнопка для проверки.
+			</p>
+
+			<button class="btn" onclick="showTimeOnPage()">
+				Показать, сколько я уже на странице
+			</button>
+
+			<h3>9.2 Фон меняется каждую секунду</h3>
+			<p>Цвет фона автоматически зависит от текущей секунды.</p>
+
+			<h3>9.3 Отсчёт до события</h3>
+
+			<label>Введите дату будущего события:</label>
+			<input type="datetime-local" id="eventDate" />
+
+			<label>Сколько осталось:</label>
+			<input type="text" id="timeLeft" readonly />
+		</div>
+	</body>
+</html>

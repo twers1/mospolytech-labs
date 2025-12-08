@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Лаба 8 — Подобие GIF</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="menu">
+			<a class="menu__item" href="index.html">Главная</a>
+			<a class="menu__item" href="gif.html">Подобие GIF</a>
+			<a class="menu__item" href="cycle.html">Чередование рисунков</a>
+			<a class="menu__item" href="hover.html">Наведение</a>
+		</div>
+
+		<div class="card">
+			<h1>8.1. Подобие GIF (Array)</h1>
+
+			<img
+				id="gifImg"
+				src="https://imgpng.ru/d/cat_PNG50438.png"
+				style="width: 300px; border-radius: 15px"
+			/>
+
+			<br /><br />
+
+			<button class="menu__item" onclick="startGif()">Старт</button>
+			<button class="menu__item" onclick="stopGif()">Стоп</button>
+
+			<br /><br /><br />
+
+			<h3>Настоящий GIF:</h3>
+
+			<img
+				src="https://i.pinimg.com/originals/67/6e/05/676e05c6d065c7d504418085ea43c694.gif"
+				style="
+					width: 300px;
+					border-radius: 15px;
+					box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+				"
+			/>
+		</div>
+
+		<script>
+			let frames = [
+				'https://imgpng.ru/d/cat_PNG50438.png',
+				'https://free-png.ru/wp-content/uploads/2021/05/free-png.ru-383.png',
+				'https://imgpng.ru/d/cat_PNG50435.png',
+				'https://w7.pngwing.com/pngs/738/668/png-transparent-cat-cat-animal-photo.png',
+			]
+
+			let i = 0
+			let timer = null
+
+			function startGif() {
+				if (timer !== null) return
+
+				timer = setInterval(() => {
+					document.getElementById('gifImg').src = frames[i]
+					i = (i + 1) % frames.length
+				}, 200)
+			}
+
+			function stopGif() {
+				clearInterval(timer)
+				timer = null
+			}
+		</script>
+	</body>
+</html>

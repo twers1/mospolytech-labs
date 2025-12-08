@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Лаба 8 — Наведение</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="menu">
+			<a class="menu__item" href="index.html">Главная</a>
+			<a class="menu__item" href="gif.html">Подобие GIF</a>
+			<a class="menu__item" href="cycle.html">Чередование рисунков</a>
+			<a class="menu__item" href="hover.html">Наведение</a>
+		</div>
+
+		<div class="card">
+			<h1>8.3. Изменение рисунка при наведении</h1>
+
+			<img
+				src="https://imgpng.ru/d/cat_PNG50438.png"
+				name="ris1"
+				style="width: 300px; border-radius: 15px; transition: 0.2s"
+				onMouseOver="ris1.src='https://free-png.ru/wp-content/uploads/2021/05/free-png.ru-383.png'"
+				onMouseOut="ris1.src='https://imgpng.ru/d/cat_PNG50438.png'"
+			/>
+		</div>
+	</body>
+</html>

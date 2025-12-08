@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Регистрация</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="menu">
+			<a class="menu__item" href="index.html">Главная</a>
+			<a class="menu__item" href="register.html">Регистрация</a>
+			<a class="menu__item" href="test.html">Психологический тест</a>
+		</div>
+
+		<div class="card">
+			<h1>Форма регистрации</h1>
+
+			<form id="regForm">
+				<h3>Ваше имя: <span class="req">*</span></h3>
+				<input
+					type="text"
+					id="name"
+					required
+					style="width: 100%; padding: 10px; border-radius: 10px"
+				/><br /><br />
+
+				<h3>О себе:</h3>
+				<textarea
+					id="bio"
+					required
+					style="width: 100%; height: 120px; padding: 10px; border-radius: 10px"
+				></textarea
+				><br /><br />
+
+				<h3>Пол: <span class="req">*</span></h3>
+				<label
+					><input type="radio" name="gender" value="Мужской" /> Мужской</label
+				><br />
+				<label
+					><input type="radio" name="gender" value="Женский" /> Женский</label
+				><br /><br />
+
+				<h3>Страна: <span class="req">*</span></h3>
+				<select
+					id="country"
+					style="width: 100%; padding: 10px; border-radius: 10px"
+				>
+					<option value="">Выберите...</option>
+					<option value="Грузия">Грузия</option>
+					<option value="Армения">Армения</option>
+					<option value="Россия">Россия</option></select
+				><br /><br />
+
+				<label>
+					<input type="checkbox" id="agree" />
+					Я согласен с условиями
+				</label>
+				<br /><br />
+
+				<button
+					type="button"
+					onclick="sendForm()"
+					class="menu__item"
+					style="background: #ffcf5c; color: #000"
+				>
+					Отправить
+				</button>
+			</form>
+		</div>
+
+		<script>
+			function sendForm() {
+				let name = document.getElementById('name').value.trim()
+				let bio = document.getElementById('bio').value.trim()
+				let country = document.getElementById('country').value
+				let agree = document.getElementById('agree').checked
+
+				let gender = ''
+				document.querySelectorAll('input[name="gender"]').forEach(r => {
+					if (r.checked) gender = r.value
+				})
+
+				if (name === '') {
+					alert('Пожалуйста, введите имя.')
+					return
+				}
+
+				if (gender === '') {
+					alert('Пожалуйста, выберите пол.')
+					return
+				}
+
+				if (country === '') {
+					alert('Пожалуйста, выберите страну.')
+					return
+				}
+
+				if (!agree) {
+					alert('Вы должны согласиться с условиями!')
+					return
+				}
+
+				alert(
+					'Имя: ' +
+						name +
+						'\nО себе: ' +
+						(bio === '' ? 'Не указано' : bio) +
+						'\nПол: ' +
+						gender +
+						'\nСтрана: ' +
+						country +
+						'\nСогласие: Да'
+				)
+			}
+		</script>
+	</body>
+</html>

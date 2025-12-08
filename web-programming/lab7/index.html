@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Лаба 7 — Калькулятор</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="card">
+			<h1>Калькулятор (Лаба №7)</h1>
+
+			<h3>Число 1:</h3>
+			<input id="n1" type="text" />
+			<div id="err1" class="error"></div>
+
+			<h3>Число 2:</h3>
+			<input id="n2" type="text" />
+			<div id="err2" class="error"></div>
+
+			<h3>Результат:</h3>
+			<input id="res" type="text" readonly />
+
+			<br /><br />
+
+			<div style="display: flex; gap: 10px; flex-wrap: wrap">
+				<button class="menu__item" onclick="calc('+')">+</button>
+				<button class="menu__item" onclick="calc('-')">-</button>
+				<button class="menu__item" onclick="calc('*')">*</button>
+				<button class="menu__item" onclick="calc('/')">/</button>
+				<button class="menu__item" onclick="sqrt()">√</button>
+			</div>
+
+			<br /><br />
+
+			<h3>Методы объекта Math:</h3>
+
+			<button class="menu__item" onclick="useMath('pow')">
+				Степень (Math.pow)
+			</button>
+			<button class="menu__item" onclick="useMath('round')">
+				Округление (Math.round)
+			</button>
+			<button class="menu__item" onclick="useMath('random')">
+				Случайное число (Math.random)
+			</button>
+			<button class="menu__item" onclick="useMath('max')">
+				Максимум (Math.max)
+			</button>
+		</div>
+
+		<script>
+			function clearErrors() {
+				document.getElementById('err1').innerText = ''
+				document.getElementById('err2').innerText = ''
+			}
+
+			function getNumbers() {
+				clearErrors()
+
+				let a = document.getElementById('n1').value.trim()
+				let b = document.getElementById('n2').value.trim()
+
+				let valid = true
+
+				if (a === '' || isNaN(a)) {
+					document.getElementById('err1').innerText =
+						'Введите корректное число.'
+					valid = false
+				}
+
+				if (b === '' || isNaN(b)) {
+					document.getElementById('err2').innerText =
+						'Введите корректное число.'
+					valid = false
+				}
+
+				if (!valid) return null
+
+				return [Number(a), Number(b)]
+			}
+
+			function calc(op) {
+				let nums = getNumbers()
+				if (!nums) return
+
+				let [a, b] = nums
+				let r = 0
+
+				switch (op) {
+					case '+':
+						r = a + b
+						break
+					case '-':
+						r = a - b
+						break
+					case '*':
+						r = a * b
+						break
+					case '/':
+						if (b === 0) {
+							document.getElementById('err2').innerText =
+								'Деление на ноль невозможно.'
+							return
+						}
+						r = a / b
+						break
+				}
+
+				document.getElementById('res').value = r
+			}
+
+			function sqrt() {
+				clearErrors()
+
+				let a = document.getElementById('n1').value.trim()
+
+				if (a === '' || isNaN(a)) {
+					document.getElementById('err1').innerText =
+						'Введите число в первое поле.'
+					return
+				}
+
+				document.getElementById('res').value = Math.sqrt(Number(a))
+			}
+
+			function useMath(method) {
+				let nums = getNumbers()
+				if (!nums) return
+				let [a, b] = nums
+
+				let r = ''
+
+				switch (method) {
+					case 'pow':
+						r = Math.pow(a, b)
+						break
+					case 'round':
+						r = Math.round(a)
+						break
+					case 'random':
+						r = Math.random().toFixed(4)
+						break
+					case 'max':
+						r = Math.max(a, b)
+						break
+				}
+
+				document.getElementById('res').value = r
+			}
+		</script>
+	</body>
+</html>
